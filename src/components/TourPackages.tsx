@@ -2,6 +2,19 @@ import { motion } from "framer-motion";
 import { Clock, CheckCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+import cityChennai from "@/assets/city-chennai.jpg";
+import cityKanchipuram from "@/assets/city-kanchipuram.jpg";
+import cityMadurai from "@/assets/city-madurai.jpg";
+import cityRameswaram from "@/assets/city-rameswaram.jpg";
+import cityCoimbatore from "@/assets/city-coimbatore.jpg";
+import cityMunnar from "@/assets/city-munnar.jpg";
+import cityAlleppey from "@/assets/city-alleppey.jpg";
+import cityKochi from "@/assets/city-kochi.jpg";
+import cityBangalore from "@/assets/city-bangalore.jpg";
+import cityMysore from "@/assets/city-mysore.jpg";
+import cityCoorg from "@/assets/city-coorg.jpg";
+import cityOoty from "@/assets/city-ooty.jpg";
+
 const packages = [
   {
     title: "Temple Trail of Tamil Nadu",
@@ -10,6 +23,7 @@ const packages = [
     highlights: ["Meenakshi Temple", "Ranganathaswamy Temple", "Rameswaram Corridor", "Kanchipuram Silks"],
     duration: "4 Days",
     price: "₹12,500",
+    images: [cityChennai, cityKanchipuram, cityMadurai, cityRameswaram],
   },
   {
     title: "Kerala Backwaters Escape",
@@ -18,6 +32,7 @@ const packages = [
     highlights: ["Munnar Tea Gardens", "Periyar Wildlife", "Houseboat Experience", "Fort Kochi"],
     duration: "5 Days",
     price: "₹16,800",
+    images: [cityCoimbatore, cityMunnar, cityAlleppey, cityKochi],
   },
   {
     title: "Bangalore Heritage Circuit",
@@ -26,6 +41,7 @@ const packages = [
     highlights: ["Mysore Palace", "Coorg Coffee Trails", "Ooty Botanical Garden", "Bandipur Safari"],
     duration: "3 Days",
     price: "₹9,500",
+    images: [cityBangalore, cityMysore, cityCoorg, cityOoty],
   },
 ];
 
@@ -59,35 +75,52 @@ const TourPackages = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.15 }}
-              className="group relative bg-primary-foreground/5 backdrop-blur-sm border border-primary-foreground/10 rounded-2xl p-8 hover:bg-primary-foreground/10 transition-all duration-300"
+              className="group relative bg-primary-foreground/5 backdrop-blur-sm border border-primary-foreground/10 rounded-2xl overflow-hidden hover:bg-primary-foreground/10 transition-all duration-300"
             >
-              <div className="flex items-center gap-2 text-secondary text-sm font-medium mb-3">
-                <Clock className="w-4 h-4" />
-                <span>{pkg.duration}</span>
-              </div>
-
-              <h3 className="text-2xl font-heading font-bold mb-2">{pkg.title}</h3>
-              <p className="text-xs text-secondary font-medium mb-4 font-heading">{pkg.route}</p>
-              <p className="text-primary-foreground/70 text-sm mb-6">{pkg.description}</p>
-
-              <div className="space-y-2 mb-8">
-                {pkg.highlights.map((h) => (
-                  <div key={h} className="flex items-center gap-2 text-sm text-primary-foreground/80">
-                    <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
-                    <span>{h}</span>
+              {/* Image grid - 2x2 */}
+              <div className="grid grid-cols-2 h-44">
+                {pkg.images.map((img, idx) => (
+                  <div key={idx} className="relative overflow-hidden">
+                    <img
+                      src={img}
+                      alt=""
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/30" />
                   </div>
                 ))}
               </div>
 
-              <div className="flex items-center justify-between pt-4 border-t border-primary-foreground/10">
-                <div>
-                  <span className="text-xs text-primary-foreground/50">Starting from</span>
-                  <p className="text-2xl font-heading font-bold text-secondary">{pkg.price}</p>
+              <div className="p-8">
+                <div className="flex items-center gap-2 text-secondary text-sm font-medium mb-3">
+                  <Clock className="w-4 h-4" />
+                  <span>{pkg.duration}</span>
                 </div>
-                <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-heading font-semibold">
-                  Book Package
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
+
+                <h3 className="text-2xl font-heading font-bold mb-2">{pkg.title}</h3>
+                <p className="text-xs text-secondary font-medium mb-4 font-heading">{pkg.route}</p>
+                <p className="text-primary-foreground/70 text-sm mb-6">{pkg.description}</p>
+
+                <div className="space-y-2 mb-8">
+                  {pkg.highlights.map((h) => (
+                    <div key={h} className="flex items-center gap-2 text-sm text-primary-foreground/80">
+                      <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
+                      <span>{h}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex items-center justify-between pt-4 border-t border-primary-foreground/10">
+                  <div>
+                    <span className="text-xs text-primary-foreground/50">Starting from</span>
+                    <p className="text-2xl font-heading font-bold text-secondary">{pkg.price}</p>
+                  </div>
+                  <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-heading font-semibold">
+                    Book Package
+                    <ArrowRight className="ml-2 w-4 h-4" />
+                  </Button>
+                </div>
               </div>
             </motion.div>
           ))}
